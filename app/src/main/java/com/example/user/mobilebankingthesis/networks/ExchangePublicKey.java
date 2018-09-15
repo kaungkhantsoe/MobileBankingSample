@@ -46,7 +46,7 @@ public class ExchangePublicKey {
                     .add(context.getResources().getString(R.string.key_mPublicKey), sPublicKey)
                     .build();
             Request request = new Request.Builder()
-                    .url(context.getResources().getString(R.string.my_url_connection) + context.getResources().getString(R.string.php_keyExchange))
+                    .url(context.getResources().getString(R.string.url_connection) + context.getResources().getString(R.string.php_keyExchange))
                     .post(body)
                     .build();
 

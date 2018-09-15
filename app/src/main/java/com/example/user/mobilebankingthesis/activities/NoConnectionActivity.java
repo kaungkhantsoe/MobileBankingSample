@@ -25,8 +25,8 @@ public class NoConnectionActivity extends AppCompatActivity {
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(v.getContext(), MainActivity.class);
-                Intent i = new Intent(v.getContext(), MainActivity.class);
+
+                Intent i = new Intent(v.getContext(), LoadingActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);

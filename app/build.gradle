@@ -18,10 +18,25 @@ android {
     }
 }
 
+ext {
+    SUPPORT_LIBARARY_VERSION = '27.1.1'
+    CONSTRAINT_LAYOUT_VERSION = '1.1.2'
+    RETROFIT_VERSION = '2.4.0'
+    RETROFIT_GSON_CONVERTER_VERSION = '2.4.0'
+    OK_HTTP_VERSION = "3.2.0"
+    PICASSO_VERSION = '2.71828'
+    GLIDE_VERSION = '4.7.1'
+    EVENT_BUS_VERSION = '3.1.1'
+    GSON_VERSION = '2.8.5'
+    ANDROID_SVG_IMG_VERSION ='1.2.1'
+    BUTTER_KNIFE_VERSION = '8.8.1'
+    CURVE25519_VERSION = '0.5.0'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBARARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBARARY_VERSION"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -31,10 +46,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
 
     // Recycler view
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBARARY_VERSION"
 
     // Card view
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBARARY_VERSION"
 
     // Expandable view
     implementation 'com.thoughtbot:expandablerecyclerview:1.0'
@@ -44,9 +59,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Curve 25519
-    implementation 'org.whispersystems:curve25519-android:0.5.0'
+    implementation "org.whispersystems:curve25519-android:$CURVE25519_VERSION"
 
     // Event Bus
-    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation "org.greenrobot:eventbus:$EVENT_BUS_VERSION"
 
 }

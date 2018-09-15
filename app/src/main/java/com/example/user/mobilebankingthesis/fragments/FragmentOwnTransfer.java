@@ -268,7 +268,7 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
                             CryptographyHelper.getInstance().getPrivateKey());
 
         String encryptedMessage = CryptographyHelper.getInstance().Encrypt(sharedKey, formatedStringText());
-        String phpName = context.getResources().getString(R.string.transferOwn_php);
+        String phpName = context.getResources().getString(R.string.php_transferOwn);
         ConnectToPhp.getInstance().Connect(context,phpName,encryptedMessage);
     }
 
