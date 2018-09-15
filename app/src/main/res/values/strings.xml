@@ -1,0 +1,78 @@
+<resources>
+
+    <string name="app_name">MobileBankingThesis</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="login_forget_ps">Forget Password?</string>
+    <string name="login_btn">Login</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+
+    <string name="navigation_menu_home">Home</string>
+    <string name="navigation_menu_accounts">Accounts</string>
+    <string name="navigation_menu_Transfers">Transfers</string>
+    <string name="navigation_menu_customerService">Customer Services</string>
+    <string name="navigation_menu_Logout">Logout</string>
+    <string name="navigation_menu_currentAndSavings">Current and Savings</string>
+    <string name="navigation_menu_fixedDeposits">Fixed Deposits</string>
+    <string name="navigation_menu_loans">Loans</string>
+    <string name="navigation_menu_fastTransfer">Fast Transfer</string>
+    <string name="navigation_menu_beneficiaryMaintenance">Beneficiary Maintenance</string>
+    <string name="navigation_menu_accountTransfer">Account Transfer</string>
+    <string name="navigation_menu_scheduledTransfers">Scheduled Transfers</string>
+    <string name="navigation_menu_cardlessAtmWithdrawal">Cardless ATM Withdrawal</string>
+    <string name="navigation_menu_remit2u">Remit2U</string>
+    <string name="navigation_menu_ownTransfer">Own Transfer</string>
+    <string name="navigation_menu_internalTransfer">Internal Transfer</string>
+    <string name="navigation_menu_cheques">Cheques</string>
+    <string name="navigation_menu_transactionActivities">Transaction Activities</string>
+    <string name="navigation_menu_exchangeRate">Exchange Rate</string>
+    <string name="navigation_menu_myProfile">My Profile</string>
+    <string name="navigation_menu_stopOrUnblockChequeRequest">Stop or Unblock Cheque Request</string>
+    <string name="navigation_menu_securityQuestions">Security Questions</string>
+
+    //URL link
+    <string name="url_connection">http://192.168.43.4/fcm/</string>
+
+    //PHP links
+    <string name="php_dummy">dummy.php</string>
+    <string name="php_get_user_account">getUserAccount.php</string>
+    <string name="php_keyExchange">keyExchange.php</string>
+    <string name="php_login">login.php</string>
+    <string name="php_transferOwn">transferOwn.php</string>
+
+    //PHP key names
+    <string name="key_ammount">ammount</string>
+    <string name="key_fromAccNumber">fromAccNumber</string>
+    <string name="key_toAccNumber">toAccNumber</string>
+
+    <string name="key_encryptedMessage">encryptedMessage</string>
+    <string name="key_decryptedMessage">decryptedMessage</string>
+
+    <string name="key_mPublicKey">mPublicKey</string>
+    <string name="key_mPrivateKey">mPrivateKey</string>
+
+    <string name="key_rPublicKey">rPublicKey</string>
+
+    <string name="key_replyCondition">replyCondition</string>
+    <string name="key_replyMessage">replyMessage</string>
+
+    <string name="key_userName">userName</string>
+    <string name="key_userID">userID</string>
+    <string name="key_userPassword">userPassword</string>
+
+    //Fragments key names
+    <string name="fg_key_home">home</string>
+    <string name="fg_key_ownTransfer">ownTransfer</string>
+
+    //Error messages
+    <string name="error_needFromAccountNumber">Please select From Account</string>
+    <string name="error_needToAccountNumberError">Please select To Account</string>
+    <string name="error_identicalAccountNumberError">Accounts cannot be identical !</string>
+    <string name="error_ammountTVEmptyError">Please fill in ammount</string>
+
+</resources>
