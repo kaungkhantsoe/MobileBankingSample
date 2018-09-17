@@ -2,6 +2,7 @@ package com.example.user.mobilebankingthesis.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.mobilebankingthesis.R;
+import com.example.user.mobilebankingthesis.activities.MainActivity;
 import com.example.user.mobilebankingthesis.data.models.AccountModel;
 import com.example.user.mobilebankingthesis.data.vo.AccountVO;
 import com.example.user.mobilebankingthesis.events.ApiEvents;
@@ -287,6 +289,11 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     * */
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onTransferSuccess(ApiEvents.onSuccessEvent onTransferOwnSuccessEvent) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+
         Toast.makeText(context,onTransferOwnSuccessEvent.getMessage(),Toast.LENGTH_SHORT).show();
     }
 

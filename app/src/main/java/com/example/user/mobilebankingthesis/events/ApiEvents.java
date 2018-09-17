@@ -2,9 +2,13 @@ package com.example.user.mobilebankingthesis.events;
 
 import android.os.Build;
 import android.util.Base64;
+import android.widget.LinearLayout;
+
+import com.example.user.mobilebankingthesis.data.vo.AccountVO;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class ApiEvents {
 
@@ -44,6 +48,19 @@ public class ApiEvents {
 
         public String getMessage() {
             return message;
+        }
+    }
+
+    public static class onAccountsLoadSuccessEvent {
+
+        List<AccountVO> accountVOList;
+
+        public onAccountsLoadSuccessEvent(List<AccountVO> accountVOList) {
+            this.accountVOList = accountVOList;
+        }
+
+        public List<AccountVO> getAccountVOList() {
+            return accountVOList;
         }
     }
 

@@ -12,8 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.mobilebankingthesis.R;
+import com.example.user.mobilebankingthesis.events.ApiEvents;
+import com.example.user.mobilebankingthesis.helpers.CryptographyHelper;
+import com.example.user.mobilebankingthesis.networks.ExchangePublicKey;
 import com.example.user.mobilebankingthesis.sessions.UserSession;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,8 +97,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this,"Username or password incorrect",Toast.LENGTH_SHORT).show();
                 }else {
                     try {
+
                         UserVO parsedData = parseResponseJson(jsonData);
                         userSession.createUserInfoSession(parsedData.getUserID(),parsedData.getUserName());
+
                         startActivity(new Intent(LoginActivity.this,MainActivity.class));
                         finish();
 
@@ -126,4 +133,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         user.setUserName(jsonObject.getString(username));
         return user;
     }
+
 }

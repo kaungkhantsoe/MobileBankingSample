@@ -7,6 +7,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
     <string name="login_forget_ps">Forget Password?</string>
     <string name="login_btn">Login</string>
     <string name="login_username_hint">Username</string>
@@ -46,7 +47,7 @@
     <string name="php_transferOwn">transferOwn.php</string>
 
     //PHP key names
-    <string name="key_ammount">ammount</string>
+    <string name="key_ammount">amount</string>
     <string name="key_fromAccNumber">fromAccNumber</string>
     <string name="key_toAccNumber">toAccNumber</string>
 
@@ -65,14 +66,20 @@
     <string name="key_userID">userID</string>
     <string name="key_userPassword">userPassword</string>
 
+    <string name="key_accountNumber">accountNumber</string>
+    <string name="key_accountAmount">accountAmount</string>
+
     //Fragments key names
     <string name="fg_key_home">home</string>
     <string name="fg_key_ownTransfer">ownTransfer</string>
+
+    //Data key names
+    <string name="hashMap_accounts">hashMap_accounts</string>
 
     //Error messages
     <string name="error_needFromAccountNumber">Please select From Account</string>
     <string name="error_needToAccountNumberError">Please select To Account</string>
     <string name="error_identicalAccountNumberError">Accounts cannot be identical !</string>
-    <string name="error_ammountTVEmptyError">Please fill in ammount</string>
+    <string name="error_ammountTVEmptyError">Please fill in amount</string>
 
 </resources>
