@@ -35,7 +35,7 @@ public class AccountModel {
     static AccountModel accountModel;
     static int userID;
 
-    byte[] mPrivateKey,mPublicKey, sharedKey;
+    static byte[] mPrivateKey,mPublicKey, sharedKey;
 
     HashMap<String,List<AccountVO>> accountsHashMap;
 
