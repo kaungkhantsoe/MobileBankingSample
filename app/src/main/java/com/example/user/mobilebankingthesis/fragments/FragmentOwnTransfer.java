@@ -64,7 +64,6 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     private String toAcc = "";
     private String ammount = "";
 
-    byte[] mPublicKey,mPrivateKey;
 
     // UserSession
     UserSession userSession;

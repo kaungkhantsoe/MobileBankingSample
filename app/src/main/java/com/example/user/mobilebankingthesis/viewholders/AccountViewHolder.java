@@ -34,7 +34,7 @@ public class AccountViewHolder extends BaseViewHolder<AccountVO> {
         mData = data;
 
         tv_home_accountAmmount.setText(mData.getAccountAmmount());
-        tv_home_accountNumber.setText(mData.getAccountNumber());
+        tv_home_accountNumber.setText(mData.getAccountNumber() + " MMK");
     }
 
     @Override

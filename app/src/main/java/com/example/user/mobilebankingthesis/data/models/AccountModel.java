@@ -35,7 +35,7 @@ public class AccountModel {
     static AccountModel accountModel;
     static int userID;
 
-    byte[] mPrivateKey,mPublicKey,sharedKey;
+    byte[] mPrivateKey,mPublicKey, sharedKey;
 
     HashMap<String,List<AccountVO>> accountsHashMap;
 
@@ -66,39 +66,9 @@ public class AccountModel {
 
     }
 
-
-    private HashMap<String,List<AccountVO>> parseJsonData(String jsonData) throws JSONException {
-
-        JSONArray jsonArray = new JSONArray(jsonData);
-
-        HashMap<String,List<AccountVO>> parsedData= new HashMap<String,List<AccountVO>>();
-
-        List<AccountVO> accountVOList = new ArrayList<>();
-
-        for (int i = 0 ; i < jsonArray.length() ; i++) {
-
-            AccountVO accountVO = new AccountVO();
-
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-            String accountNumber = CryptographyHelper.getInstance().Decrypt(mPrivateKey,jsonObject.getString(context.getResources().getString(R.string.key_accountNumber)));
-            String accountAmmount = CryptographyHelper.getInstance().Decrypt(mPrivateKey,jsonObject.getString(context.getResources().getString(R.string.key_accountAmount)));
-            accountVO.setAccountNumber(accountNumber);
-            accountVO.setAccountAmmount(accountAmmount);
-
-            accountVOList.add(accountVO);
-        }
-
-        parsedData.put(context.getResources().getString(R.string.hashMap_accounts), accountVOList);
-
-        return parsedData;
-    }
-
-    // aaaa
-
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onReceivePublickKey(ApiEvents.onReceivePublicKeyEvent onReceivePublicKeyEvent) {
-        byte[] sharedKey = CryptographyHelper.getInstance()
+        sharedKey = CryptographyHelper.getInstance()
                 .getSharedKey(onReceivePublicKeyEvent.getPublicKey(),
                         CryptographyHelper.getInstance().getPrivateKey());
 
@@ -132,6 +102,35 @@ public class AccountModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private HashMap<String,List<AccountVO>> parseJsonData(String jsonData) throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(jsonData);
+
+        HashMap<String,List<AccountVO>> parsedData= new HashMap<String,List<AccountVO>>();
+
+        List<AccountVO> accountVOList = new ArrayList<>();
+
+        for (int i = 0 ; i < jsonArray.length() ; i++) {
+
+            AccountVO accountVO = new AccountVO();
+
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+            String accountNumber = CryptographyHelper.getInstance().Decrypt(sharedKey,jsonObject.getString(context.getResources().getString(R.string.key_accountNumber)));
+            String accountAmmount = CryptographyHelper.getInstance().Decrypt(sharedKey,jsonObject.getString(context.getResources().getString(R.string.key_accountAmount)));
+
+            accountVO.setAccountNumber(accountNumber);
+            accountVO.setAccountAmmount(accountAmmount);
+
+            accountVOList.add(accountVO);
+        }
+
+        parsedData.put(context.getResources().getString(R.string.hashMap_accounts), accountVOList);
+
+        return parsedData;
     }
 
     public String formatedStringText() {

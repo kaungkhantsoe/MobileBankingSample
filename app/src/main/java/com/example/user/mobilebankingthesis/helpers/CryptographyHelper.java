@@ -63,12 +63,12 @@ public class CryptographyHelper {
 
 
     // Decryption
-    public String Decrypt(byte[] privateKey, String encryptedText) {
+    public String Decrypt(byte[] sharedKey, String encryptedText) {
         String decrypted;
 
         AES aes = new AES();
 
-        aes.setKey(privateKey);
+        aes.setKey(sharedKey);
         decrypted = ((AES)aes).Decrypt(encryptedText);
         return decrypted;
     }
