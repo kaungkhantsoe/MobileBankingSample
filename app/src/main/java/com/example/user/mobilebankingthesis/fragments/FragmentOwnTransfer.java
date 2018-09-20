@@ -28,6 +28,7 @@ import com.example.user.mobilebankingthesis.networks.ConnectToPhp;
 import com.example.user.mobilebankingthesis.networks.ExchangePublicKey;
 import com.example.user.mobilebankingthesis.sessions.UserSession;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -277,7 +278,7 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     /*
     * On getting error, show error message with toast
     * */
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorEvent(ApiEvents.onErrorEvent onErrorEvent) {
         Toast.makeText(context,onErrorEvent.getError(),Toast.LENGTH_SHORT).show();
     }
@@ -286,7 +287,7 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     /*
     * On success, show success message with toast
     * */
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTransferSuccess(ApiEvents.onSuccessEvent onTransferOwnSuccessEvent) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -298,5 +299,17 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
 
     public String formatedStringText() {
         return userID + "," + fromAcc + "," + toAcc + "," + ammount;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

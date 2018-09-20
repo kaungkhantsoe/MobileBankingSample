@@ -20,6 +20,7 @@ import com.example.user.mobilebankingthesis.delegates.AccountDelegate;
 import com.example.user.mobilebankingthesis.events.ApiEvents;
 import com.example.user.mobilebankingthesis.sessions.UserSession;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -66,7 +67,7 @@ public class FragmentHome extends Fragment implements AccountDelegate {
         rv_home.setAdapter(accountsRVAdapter);
     }
 
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAccLoadSuccess(ApiEvents.onAccountsLoadSuccessEvent onAccountLoadSuccessEvent) {
         accountsRVAdapter.appendNewData(onAccountLoadSuccessEvent.getAccountVOList());
     }
@@ -76,5 +77,17 @@ public class FragmentHome extends Fragment implements AccountDelegate {
 
         Intent intent = new Intent(context, AccountDetailActivity.class);
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }
