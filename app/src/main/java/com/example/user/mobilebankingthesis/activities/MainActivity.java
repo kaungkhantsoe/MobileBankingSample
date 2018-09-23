@@ -12,8 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.user.mobilebankingthesis.fragments.FragmentOwnTransfer;
+import com.example.user.mobilebankingthesis.fragments.FragmentHome;
 import com.example.user.mobilebankingthesis.R;
+import com.example.user.mobilebankingthesis.sessions.UserSession;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private UserSession userSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        userSession = new UserSession(this);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +99,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void replaceFragment(String item){
+    private void replaceFragment(String item){
 
         FragmentManager fragmentManager = getFragmentManager();
         switch (item){
-            case "ownTransfer":
-                fragmentManager.beginTransaction().replace(R.id.content_main_frame, new FragmentOwnTransfer()).commit();
-                break;
-
             default:
-                fragmentManager.beginTransaction().replace(R.id.content_main_frame, new FragmentOwnTransfer()).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_main_frame, new FragmentHome()).commit();
                 break;
 
         }
@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             replaceFragment(this.getResources().getString(R.string.fg_key_home));
         }
-        else if (id == R.id.navigation_menu_ownTransfer) {
+        else if (id == R.id.navigation_menu_logout) {
             // Handle the camera action
-            replaceFragment(this.getResources().getString(R.string.fg_key_ownTransfer));
+            userSession.logoutUser();
         }
 
         setUpToolBar(item.getTitle().toString());

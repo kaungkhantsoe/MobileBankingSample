@@ -12,13 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.mobilebankingthesis.R;
-import com.example.user.mobilebankingthesis.events.ApiEvents;
-import com.example.user.mobilebankingthesis.helpers.CryptographyHelper;
-import com.example.user.mobilebankingthesis.networks.ExchangePublicKey;
 import com.example.user.mobilebankingthesis.sessions.UserSession;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_layout);
+        setContentView(R.layout.activity_login);
 
         userSession = new UserSession(LoginActivity.this);
 

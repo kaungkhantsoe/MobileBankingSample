@@ -1,13 +1,12 @@
-package com.example.user.mobilebankingthesis.fragments;
+package com.example.user.mobilebankingthesis.activities;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.mobilebankingthesis.R;
-import com.example.user.mobilebankingthesis.activities.MainActivity;
 import com.example.user.mobilebankingthesis.data.models.AccountModel;
 import com.example.user.mobilebankingthesis.data.vo.AccountVO;
 import com.example.user.mobilebankingthesis.events.ApiEvents;
@@ -38,7 +36,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class OwnTransferActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -57,8 +56,6 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     @BindView(R.id.own_transfer_paynow)
     Button own_transfer_paynow;
 
-    Context context;
-
     String[] AccArr;
 
     private String fromAcc = "";
@@ -70,42 +67,37 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
     UserSession userSession;
     String userID;
 
+    public static Intent getIntent(Context context ) {
+        Intent intent = new Intent(context, OwnTransferActivity.class);
+        return intent;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity().getApplicationContext();
-        userSession = new UserSession(context);
+        setContentView(R.layout.activity_owntransfer);
+
+        userSession = new UserSession(this);
         userID = userSession.getUserInfoSession().getUserID();
 
-    }
+        ButterKnife.bind(this);
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_own_transfer, container, false);
-
-        ButterKnife.bind(this,view);
-
-        return view;
-
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupSpinner();
+        AccountModel.getInstance(this).loadAccounts(userSession.getUserInfoSession().getUserID());
 
         own_transfer_paynow.setOnClickListener(this);
+
     }
 
-    private void setupSpinner() {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSuccessAccLoading(ApiEvents.onAccountsLoadSuccessEvent onAccountsLoadSuccessEvent) {
+        setupSpinner(onAccountsLoadSuccessEvent.getAccountVOList());
+    }
+
+    private void setupSpinner(List<AccountVO> accountVOS) {
 
         String userID = userSession.getUserInfoSession().getUserID();
 
         String[] accArr;
-        HashMap<String,List<AccountVO>> accountVoHash = AccountModel.getInstance(context).getAccountsHashMap();
-        List<AccountVO> accountVOS = accountVoHash.get(AccountModel.getInstance(context).getHashMapKeyName());
 
         accArr = new String[accountVOS.size()];
 
@@ -128,7 +120,7 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
 
         // Initializing FROM ArrayAdapter
         ArrayAdapter<String> fromSpinnerArrayAdapter = new ArrayAdapter<String>(
-                context,android.R.layout.simple_spinner_item,AccArr){
+                this,android.R.layout.simple_spinner_item,AccArr){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -164,7 +156,7 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
 
         // Initializing TO ArrayAdapter
         ArrayAdapter<String> toSpinnerArrayAdapter = new ArrayAdapter<String>(
-                context,android.R.layout.simple_spinner_item,AccArr){
+                this,android.R.layout.simple_spinner_item,AccArr){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -218,8 +210,6 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
             Log.w(TAG,AccArr[position] + " selected");
 
         }
-
-
     }
 
     @Override
@@ -254,51 +244,51 @@ public class FragmentOwnTransfer extends Fragment implements AdapterView.OnItemS
 
         // Transfer ammount
         else {
-            ExchangePublicKey.getInstance().Exchange(context,userID,CryptographyHelper.getInstance().getPublicKey());
+            ExchangePublicKey.getInstance().Exchange(this,userID, CryptographyHelper.getInstance().getPublicKey());
         }
 
     }
 
 
     /*
-    * On receive public key, send encrypted message to php
-    * */
+     * On receive public key, send encrypted message to php
+     * */
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onReceivePublicKey(ApiEvents.onReceivePublicKeyEvent onReceivePublicKeyEvent) {
         byte[] sharedKey = CryptographyHelper.getInstance()
                 .getSharedKey(onReceivePublicKeyEvent.getPublicKey(),
-                            CryptographyHelper.getInstance().getPrivateKey());
+                        CryptographyHelper.getInstance().getPrivateKey());
 
         String encryptedMessage = CryptographyHelper.getInstance().Encrypt(sharedKey, formatedStringText());
-        String phpName = context.getResources().getString(R.string.php_transferOwn);
-        ConnectToPhp.getInstance().Connect(context,phpName,encryptedMessage);
+        String phpName = this.getResources().getString(R.string.php_transferOwn);
+        ConnectToPhp.getInstance().Connect(this,phpName,encryptedMessage);
     }
 
 
     /*
-    * On getting error, show error message with toast
-    * */
+     * On getting error, show error message with toast
+     * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorEvent(ApiEvents.onErrorEvent onErrorEvent) {
-        Toast.makeText(context,onErrorEvent.getError(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,onErrorEvent.getError(),Toast.LENGTH_SHORT).show();
     }
 
 
     /*
-    * On success, show success message with toast
-    * */
+     * On success, show success message with toast
+     * */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTransferSuccess(ApiEvents.onSuccessEvent onTransferOwnSuccessEvent) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+        startActivity(intent);
 
-        Toast.makeText(context,onTransferOwnSuccessEvent.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,onTransferOwnSuccessEvent.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     public String formatedStringText() {
-        return userID + "," + fromAcc + "," + toAcc + "," + ammount;
+        return userID + "," + fromAcc + "," + toAcc + "," + ammount + "," + own_transfer_description.getText();
     }
 
     @Override

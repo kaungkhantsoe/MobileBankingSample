@@ -68,13 +68,12 @@
 
     <string name="key_accountNumber">accountNumber</string>
     <string name="key_accountAmount">accountAmount</string>
+    <string name="key_accountType">accountType</string>
+    <string name="key_accountOpeningDate">accountOpeningDate</string>
 
     //Fragments key names
     <string name="fg_key_home">home</string>
     <string name="fg_key_ownTransfer">ownTransfer</string>
-
-    //Data key names
-    <string name="hashMap_accounts">hashMap_accounts</string>
 
     //Error messages
     <string name="error_needFromAccountNumber">Please select From Account</string>

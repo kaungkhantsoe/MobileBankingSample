@@ -9,35 +9,6 @@
             android:title="@string/navigation_menu_home" />
 
         <item
-            android:id="@+id/navigation_menu_accounts"
-            android:title="@string/navigation_menu_accounts" />
-
-        <item
-            android:id="@+id/navigation_menu_transfer"
-            android:title="@string/navigation_menu_Transfers" />
-
-        <item
-            android:id="@+id/navigation_menu_ownTransfer"
-            android:title="@string/navigation_menu_ownTransfer" />
-
-        <item
-            android:id="@+id/navigation_menu_fastTransfer"
-            android:title="@string/navigation_menu_fastTransfer" />
-
-        <item
-            android:id="@+id/navigation_menu_internalTransfer"
-            android:title="@string/navigation_menu_internalTransfer" />
-
-        <item
-            android:id="@+id/navigation_menu_cardlessAtmWithdrawal"
-            android:title="@string/navigation_menu_cardlessAtmWithdrawal" />
-
-        <item
-            android:id="@+id/navigation_menu_remit2u"
-            android:title="@string/navigation_menu_remit2u"/>
-
-
-        <item
             android:id="@+id/navigation_menu_customer_service"
             android:title="@string/navigation_menu_customerService" />
 

@@ -22,7 +22,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loading_layout);
+        setContentView(R.layout.activity_loading_layout);
 
         progressBar = findViewById(R.id.myProgressBar);
         progressBar.setVisibility(View.VISIBLE);

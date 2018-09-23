@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.user.mobilebankingthesis.R;
-import com.example.user.mobilebankingthesis.activities.MainActivity;
 
 /**
  * Created by User on 4/22/2018.
@@ -19,7 +18,7 @@ public class NoConnectionActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.no_connection);
+        setContentView(R.layout.activity_no_connection);
 
         Button retryButton = findViewById(R.id.retrybtn);
         retryButton.setOnClickListener(new View.OnClickListener() {
